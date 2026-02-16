@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Mail, Phone, Menu, X, ChevronDown, ExternalLink } from 'lucide-react';
 import { siteConfig, contactInfo, externalLinks } from '../data/siteData';
+import { useEffects } from '../context/EffectsContext';
 import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
@@ -26,6 +27,7 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
+  const { effectsEnabled } = useEffects();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -64,7 +66,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Navbar */}
-      <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
+      <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''} ${effectsEnabled ? 'glass-effect' : ''}`}>
         <div className="container navbar-inner">
           <Link to="/" className="navbar-brand">
             <img
