@@ -11,6 +11,7 @@ const footerLinks = {
     { label: 'Admissions', path: '/admissions' },
     { label: 'Events', path: '/events' },
     { label: 'Contact', path: '/contact' },
+    { label: 'Site Map', path: '/sitemap' },
   ],
   resources: [
     { label: 'University Portal', url: externalLinks.universityPortal },

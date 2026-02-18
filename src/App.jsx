@@ -50,6 +50,7 @@ function App() {
             <Route path="student-login" element={<StudentLogin />} />
             <Route path="teacher-login" element={<TeacherLogin />} />
             <Route path="teacher-dashboard" element={<TeacherDashboard />} />
+            <Route path="sitemap" element={<SiteMap />} />
           </Route>
         </Routes>
       </BrowserRouter>
