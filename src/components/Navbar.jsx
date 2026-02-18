@@ -97,11 +97,12 @@ export default function Navbar() {
           </Link>
 
           <nav className={`navbar-nav ${isMobileOpen ? 'nav-open' : ''}`}>
-            {navItems.map((item, i) =>
-              item.children ? (
+            {navItems.map((item, i) => {
+              const isDropdownActive = item.children?.some(child => location.pathname === child.path);
+              return item.children ? (
                 <div
                   key={i}
-                  className={`nav-dropdown ${openDropdown === i ? 'dropdown-open' : ''}`}
+                  className={`nav-dropdown ${openDropdown === i ? 'dropdown-open' : ''} ${isDropdownActive ? 'dropdown-active' : ''}`}
                   onMouseEnter={() => setOpenDropdown(i)}
                   onMouseLeave={() => setOpenDropdown(null)}
                 >
@@ -123,8 +124,8 @@ export default function Navbar() {
                 <NavLink key={item.path} to={item.path} className="nav-link" end={item.path === '/'}>
                   {item.label}
                 </NavLink>
-              )
-            )}
+              );
+            })}
             <a
               href={externalLinks.admissionPortal}
               target="_blank"
