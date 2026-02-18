@@ -2,13 +2,19 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Mail, Phone, Menu, X, ChevronDown, ExternalLink } from 'lucide-react';
 import { siteConfig, contactInfo, externalLinks } from '../data/siteData';
-import { useEffects } from '../context/EffectsContext';
 import ThemeToggle from './ThemeToggle';
 import './Navbar.css';
 
 const navItems = [
   { path: '/', label: 'Home' },
-  { path: '/about', label: 'About' },
+  {
+    label: 'About',
+    children: [
+      { path: '/about', label: 'About Us' },
+      { path: '/ncc', label: 'NCC' },
+      { path: '/vc-vision', label: 'VC\'s Vision' },
+    ],
+  },
   {
     label: 'Academics',
     children: [
@@ -17,7 +23,8 @@ const navItems = [
       { path: '/admissions', label: 'Admissions' },
     ],
   },
-  { path: '/events', label: 'Events & Activities' },
+  { path: '/societies', label: 'Societies' },
+  { path: '/events', label: 'Events' },
   { path: '/notices', label: 'Notices' },
   { path: '/contact', label: 'Contact' },
 ];
@@ -27,7 +34,6 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const location = useLocation();
-  const { effectsEnabled } = useEffects();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -55,6 +61,12 @@ export default function Navbar() {
             </a>
           </div>
           <div className="utility-right">
+            <a href="/student-login" className="utility-link">
+              Student Login
+            </a>
+            <a href="/teacher-login" className="utility-link">
+              Teacher Login
+            </a>
             <a href={externalLinks.admissionPortal} target="_blank" rel="noopener noreferrer" className="utility-link">
               Admissions <ExternalLink size={12} />
             </a>
@@ -66,7 +78,7 @@ export default function Navbar() {
       </div>
 
       {/* Main Navbar */}
-      <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''} ${effectsEnabled ? 'glass-effect' : ''}`}>
+      <header className={`navbar ${isScrolled ? 'navbar-scrolled' : ''}`}>
         <div className="container navbar-inner">
           <Link to="/" className="navbar-brand">
             <img
