@@ -19,6 +19,8 @@ const SITE_CONFIG_FILE = path.join(__dirname, 'siteConfig.json');
 const FACULTY_FILE = path.join(__dirname, 'faculty.json');
 const STATS_FILE = path.join(__dirname, 'stats.json');
 const PLACEMENTS_FILE = path.join(__dirname, 'placements.json');
+const SOCIETIES_FILE = path.join(__dirname, 'societies.json');
+const STUDENTS_FILE = path.join(__dirname, 'students.json');
 
 // Helper functions
 function readData(file) {
@@ -260,6 +262,72 @@ app.delete('/api/placements/:id', (req, res) => {
   const placements = readData(PLACEMENTS_FILE);
   const filtered = placements.filter(p => p.id != req.params.id);
   writeData(PLACEMENTS_FILE, filtered);
+  res.json({ success: true });
+});
+
+// Societies
+app.get('/api/societies', (req, res) => {
+  const societies = readData(SOCIETIES_FILE);
+  res.json(societies);
+});
+
+app.post('/api/societies', (req, res) => {
+  const societies = readData(SOCIETIES_FILE);
+  const newSociety = { ...req.body, id: Date.now() };
+  societies.push(newSociety);
+  writeData(SOCIETIES_FILE, societies);
+  res.json({ id: newSociety.id });
+});
+
+app.put('/api/societies/:id', (req, res) => {
+  const societies = readData(SOCIETIES_FILE);
+  const index = societies.findIndex(s => s.id == req.params.id);
+  if (index !== -1) {
+    societies[index] = { ...req.body, id: parseInt(req.params.id) };
+    writeData(SOCIETIES_FILE, societies);
+    res.json({ success: true });
+  } else {
+    res.status(404).json({ error: 'Society not found' });
+  }
+});
+
+app.delete('/api/societies/:id', (req, res) => {
+  const societies = readData(SOCIETIES_FILE);
+  const filtered = societies.filter(s => s.id != req.params.id);
+  writeData(SOCIETIES_FILE, filtered);
+  res.json({ success: true });
+});
+
+// Students
+app.get('/api/students', (req, res) => {
+  const students = readData(STUDENTS_FILE);
+  res.json(students);
+});
+
+app.post('/api/students', (req, res) => {
+  const students = readData(STUDENTS_FILE);
+  const newStudent = { ...req.body, id: Date.now() };
+  students.push(newStudent);
+  writeData(STUDENTS_FILE, students);
+  res.json({ id: newStudent.id });
+});
+
+app.put('/api/students/:id', (req, res) => {
+  const students = readData(STUDENTS_FILE);
+  const index = students.findIndex(s => s.id == req.params.id);
+  if (index !== -1) {
+    students[index] = { ...req.body, id: parseInt(req.params.id) };
+    writeData(STUDENTS_FILE, students);
+    res.json({ success: true });
+  } else {
+    res.status(404).json({ error: 'Student not found' });
+  }
+});
+
+app.delete('/api/students/:id', (req, res) => {
+  const students = readData(STUDENTS_FILE);
+  const filtered = students.filter(s => s.id != req.params.id);
+  writeData(STUDENTS_FILE, filtered);
   res.json({ success: true });
 });
 

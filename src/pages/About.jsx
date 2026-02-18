@@ -1,6 +1,6 @@
 import {
   Award, Users, BookOpen, Target, Eye, Heart, Star, Globe,
-  Briefcase, Building, FlaskConical, GraduationCap, Calendar
+  Briefcase, Building, FlaskConical, GraduationCap, Calendar, Trophy
 } from 'lucide-react';
 import { leadership, researchAreas, partnerCompanies } from '../data/faculty';
 import { useRevealOnScroll } from '../lib/hooks';

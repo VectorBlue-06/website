@@ -1,25 +1,21 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Plus, Edit, Trash2, Save, Settings, Layout, Users, BookOpen, Bell, Briefcase, GraduationCap, X, RefreshCw } from 'lucide-react';
+import { Plus, Trash2, Save, Settings, Layout, Users, BookOpen, Bell, Briefcase, GraduationCap, Calendar, Phone, UserPlus, Award } from 'lucide-react';
+import { CrudManager } from '../components/CrudManager';
 
 export default function AdminDashboard() {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('siteConfig');
-
-  useEffect(() => {
-    if (!localStorage.getItem('adminLoggedIn')) {
-      navigate('/admin-login');
-    }
-  }, [navigate]);
+  const [activeTab, setActiveTab] = useState('contacts');
 
   const tabs = [
-    { id: 'siteConfig', label: 'Site Settings', icon: <Settings size={16} /> },
+    { id: 'contacts', label: 'Contact & Info', icon: <Phone size={16} /> },
     { id: 'stats', label: 'Stats', icon: <Layout size={16} /> },
     { id: 'events', label: 'Events', icon: <BookOpen size={16} /> },
     { id: 'notices', label: 'Notices', icon: <Bell size={16} /> },
+    { id: 'timetable', label: 'Timetable', icon: <Calendar size={16} /> },
     { id: 'faculty', label: 'Faculty', icon: <Users size={16} /> },
     { id: 'placements', label: 'Placements', icon: <Briefcase size={16} /> },
     { id: 'programs', label: 'Programs', icon: <GraduationCap size={16} /> },
+    { id: 'societies', label: 'Societies', icon: <Award size={16} /> },
+    { id: 'students', label: 'Students', icon: <UserPlus size={16} /> },
   ];
 
   return (
@@ -49,13 +45,16 @@ export default function AdminDashboard() {
           </div>
 
           <div className="dashboard-content">
-            {activeTab === 'siteConfig' && <SiteConfigEditor />}
+            {activeTab === 'contacts' && <ContactInfoEditor />}
             {activeTab === 'stats' && <StatsEditor />}
             {activeTab === 'events' && <CrudManager type="events" fields={eventFields} />}
             {activeTab === 'notices' && <CrudManager type="notices" fields={noticeFields} />}
+            {activeTab === 'timetable' && <CrudManager type="timetable" fields={timetableFields} />}
             {activeTab === 'faculty' && <CrudManager type="faculty" fields={facultyFields} />}
             {activeTab === 'placements' && <CrudManager type="placements" fields={placementFields} />}
             {activeTab === 'programs' && <CrudManager type="programs" fields={programFields} />}
+            {activeTab === 'societies' && <CrudManager type="societies" fields={societyFields} />}
+            {activeTab === 'students' && <CrudManager type="students" fields={studentFields} />}
           </div>
         </div>
       </section>
@@ -105,20 +104,45 @@ const programFields = [
   { key: 'description', label: 'Description', type: 'textarea' },
 ];
 
-function SiteConfigEditor() {
+const timetableFields = [
+  { key: 'title', label: 'Title', type: 'text', required: true },
+  { key: 'department', label: 'Department', type: 'select', options: ['Electronics & Communication', 'Electronics & Computer Science', 'Mechanical Engineering', 'Civil Engineering', 'Electrical Engineering', 'Computer Science', 'Agricultural Engineering'], required: true },
+  { key: 'semester', label: 'Semester', type: 'select', options: ['1', '2', '3', '4', '5', '6', '7', '8'], required: true },
+  { key: 'academicYear', label: 'Academic Year', type: 'text', required: true },
+  { key: 'description', label: 'Details / Notes', type: 'textarea' },
+];
+
+const societyFields = [
+  { key: 'name', label: 'Society Name', type: 'text', required: true },
+  { key: 'description', label: 'Description', type: 'textarea', required: true },
+  { key: 'president', label: 'President / Head', type: 'text' },
+  { key: 'contactEmail', label: 'Contact Email', type: 'text' },
+  { key: 'contactPhone', label: 'Contact Phone', type: 'text' },
+  { key: 'category', label: 'Category', type: 'select', options: ['Technical', 'Cultural', 'Social', 'Sports', 'Literary', 'Other'] },
+];
+
+const studentFields = [
+  { key: 'name', label: 'Full Name', type: 'text', required: true },
+  { key: 'enrollmentNo', label: 'Enrollment No.', type: 'text', required: true },
+  { key: 'branch', label: 'Branch', type: 'select', options: ['Electronics & Communication', 'Electronics & Computer Science', 'Mechanical Engineering', 'Civil Engineering', 'Electrical Engineering', 'Computer Science', 'Agricultural Engineering'], required: true },
+  { key: 'semester', label: 'Current Semester', type: 'select', options: ['1', '2', '3', '4', '5', '6', '7', '8'] },
+  { key: 'year', label: 'Admission Year', type: 'text' },
+  { key: 'email', label: 'Email', type: 'text' },
+  { key: 'phone', label: 'Phone', type: 'text' },
+];
+
+function ContactInfoEditor() {
   const [config, setConfig] = useState({
-    name: 'SoET',
-    fullName: 'School of Engineering and Technology',
-    university: 'Samrat Vikramaditya Vishwavidyalaya, Ujjain',
-    tagline: 'Empowering Innovation, Shaping Futures',
-    approval: 'AICTE Approved',
-    founded: 1957,
-    soetEstablished: 2011,
     emailGeneral: 'soet@vikramuniv.ac.in',
     emailAdmissions: 'admissions.soet@vikramuniv.ac.in',
     phoneMain: '+91 734-2514271',
     phoneAdmission: '+91 734-2514272',
-    address: 'School of Engineering and Technology, Vikram University, Ujjain, Madhya Pradesh - 456010, India',
+    phoneNCC: '+91 98765 43210',
+    whatsapp: '',
+    socialFacebook: '',
+    socialInstagram: '',
+    socialLinkedin: '',
+    socialYoutube: '',
   });
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
@@ -143,33 +167,31 @@ function SiteConfigEditor() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(config),
       });
-      setMessage('Site configuration saved successfully!');
+      setMessage('Contact info saved successfully!');
       setTimeout(() => setMessage(''), 3000);
     } catch (err) {
-      setMessage('Error saving configuration.');
+      setMessage('Error saving contact info.');
     }
     setSaving(false);
   };
 
   const configFields = [
-    { key: 'name', label: 'Site Short Name' },
-    { key: 'fullName', label: 'Full Name' },
-    { key: 'university', label: 'University Name' },
-    { key: 'tagline', label: 'Tagline' },
-    { key: 'approval', label: 'Approval Status' },
-    { key: 'founded', label: 'University Founded Year' },
-    { key: 'soetEstablished', label: 'SoET Established Year' },
     { key: 'emailGeneral', label: 'General Email' },
     { key: 'emailAdmissions', label: 'Admissions Email' },
     { key: 'phoneMain', label: 'Main Phone' },
     { key: 'phoneAdmission', label: 'Admission Phone' },
-    { key: 'address', label: 'Full Address' },
+    { key: 'phoneNCC', label: 'NCC Contact Number' },
+    { key: 'whatsapp', label: 'WhatsApp Number' },
+    { key: 'socialFacebook', label: 'Facebook URL' },
+    { key: 'socialInstagram', label: 'Instagram URL' },
+    { key: 'socialLinkedin', label: 'LinkedIn URL' },
+    { key: 'socialYoutube', label: 'YouTube URL' },
   ];
 
   return (
     <div className="manager-section">
       <div className="manager-header">
-        <h3><Settings size={20} /> Site Configuration</h3>
+        <h3><Phone size={20} /> Contact & Info</h3>
         <button className="btn btn-primary" onClick={handleSave} disabled={saving}>
           <Save size={16} /> {saving ? 'Saving...' : 'Save Changes'}
         </button>
@@ -272,173 +294,5 @@ function StatsEditor() {
         ))}
       </div>
     </div>
-  );
-}
-
-function CrudManager({ type, fields }) {
-  const [items, setItems] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [editingItem, setEditingItem] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchItems();
-  }, [type]);
-
-  const fetchItems = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch(`/api/${type}`);
-      const data = await res.json();
-      setItems(Array.isArray(data) ? data : []);
-    } catch (err) {
-      console.error(`Error fetching ${type}:`, err);
-      setItems([]);
-    }
-    setLoading(false);
-  };
-
-  const handleDelete = async (id) => {
-    if (!confirm('Are you sure you want to delete this item?')) return;
-    try {
-      await fetch(`/api/${type}/${id}`, { method: 'DELETE' });
-      fetchItems();
-    } catch (err) {
-      console.error('Error deleting:', err);
-    }
-  };
-
-  const handleEdit = (item) => {
-    setEditingItem(item);
-    setShowForm(true);
-  };
-
-  const handleSave = () => {
-    setShowForm(false);
-    setEditingItem(null);
-    fetchItems();
-  };
-
-  const displayField = fields[0]?.key || 'title';
-  const descField = fields.find(f => f.key === 'description' || f.key === 'department' || f.key === 'company')?.key;
-
-  return (
-    <div className="manager-section">
-      <div className="manager-header">
-        <h3>{type.charAt(0).toUpperCase() + type.slice(1)} Manager</h3>
-        <div style={{ display: 'flex', gap: '0.5rem' }}>
-          <button className="btn btn-outline" onClick={fetchItems}>
-            <RefreshCw size={16} /> Refresh
-          </button>
-          <button className="btn btn-primary" onClick={() => { setEditingItem(null); setShowForm(true); }}>
-            <Plus size={16} /> Add {type.slice(0, -1)}
-          </button>
-        </div>
-      </div>
-
-      {showForm && (
-        <DynamicForm
-          item={editingItem}
-          type={type}
-          fields={fields}
-          onSave={handleSave}
-          onCancel={() => { setShowForm(false); setEditingItem(null); }}
-        />
-      )}
-
-      {loading ? (
-        <p>Loading {type}...</p>
-      ) : (
-        <div className="items-list">
-          {items.map((item) => (
-            <div key={item.id} className="item-card">
-              <div className="item-info">
-                <h4>{item[displayField] || item.title || item.name || 'Untitled'}</h4>
-                {descField && <p>{item[descField]}</p>}
-                {item.date && <span>{item.date}</span>}
-                {item.type && <span style={{ marginLeft: '0.5rem' }}>{item.type}</span>}
-              </div>
-              <div className="item-actions">
-                <button onClick={() => handleEdit(item)} title="Edit"><Edit size={16} /></button>
-                <button onClick={() => handleDelete(item.id)} title="Delete"><Trash2 size={16} /></button>
-              </div>
-            </div>
-          ))}
-          {!items.length && <p>No {type} found. Click &quot;Add&quot; to create one.</p>}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function DynamicForm({ item, type, fields, onSave, onCancel }) {
-  const buildInitialData = () => {
-    const data = {};
-    fields.forEach(f => { data[f.key] = item?.[f.key] || ''; });
-    return data;
-  };
-
-  const [formData, setFormData] = useState(buildInitialData);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const method = item ? 'PUT' : 'POST';
-      const url = item ? `/api/${type}/${item.id}` : `/api/${type}`;
-      await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      onSave();
-    } catch (err) {
-      console.error('Error saving:', err);
-    }
-  };
-
-  return (
-    <form className="item-form" onSubmit={handleSubmit}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h4>{item ? 'Edit' : 'Add'} {type.slice(0, -1)}</h4>
-        <button type="button" onClick={onCancel} style={{ cursor: 'pointer' }}><X size={20} /></button>
-      </div>
-      <div className="admin-config-grid">
-        {fields.map((field) => (
-          <div key={field.key} className="form-group">
-            <label>{field.label}</label>
-            {field.type === 'textarea' ? (
-              <textarea
-                value={formData[field.key]}
-                onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                required={field.required}
-              />
-            ) : field.type === 'select' ? (
-              <select
-                value={formData[field.key]}
-                onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                required={field.required}
-                style={{ padding: '0.65rem 0.85rem', border: '2px solid var(--border-color)', borderRadius: 'var(--radius-lg)', background: 'var(--surface-input)', color: 'var(--text-primary)' }}
-              >
-                <option value="">Select...</option>
-                {field.options.map(opt => (
-                  <option key={opt} value={opt}>{opt.charAt(0).toUpperCase() + opt.slice(1)}</option>
-                ))}
-              </select>
-            ) : (
-              <input
-                type={field.type || 'text'}
-                value={formData[field.key]}
-                onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                required={field.required}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="dashboard-page form-actions" style={{ marginTop: '1.5rem' }}>
-        <button type="submit" className="btn btn-primary"><Save size={16} /> Save</button>
-        <button type="button" onClick={onCancel} className="btn btn-outline">Cancel</button>
-      </div>
-    </form>
   );
 }
