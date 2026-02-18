@@ -1,5 +1,4 @@
 import { ExternalLink } from 'lucide-react';
-import './Societies.css';
 
 export default function Societies() {
   return (

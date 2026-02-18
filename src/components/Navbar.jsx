@@ -3,7 +3,6 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Mail, Phone, Menu, X, ChevronDown, ExternalLink } from 'lucide-react';
 import { siteConfig, contactInfo, externalLinks } from '../data/siteData';
 import ThemeToggle from './ThemeToggle';
-import './Navbar.css';
 
 const navItems = [
   { path: '/', label: 'Home' },
@@ -11,8 +10,10 @@ const navItems = [
     label: 'About',
     children: [
       { path: '/about', label: 'About Us' },
-      { path: '/ncc', label: 'NCC' },
       { path: '/vc-vision', label: 'VC\'s Vision' },
+      { path: '/placements', label: 'Alumni & Placements' },
+      { path: '/ncc', label: 'NCC' },
+      { path: '/anti-ragging', label: 'Anti-Ragging' },
     ],
   },
   {
@@ -66,6 +67,9 @@ export default function Navbar() {
             </a>
             <a href="/teacher-login" className="utility-link">
               Teacher Login
+            </a>
+            <a href="/admin-login" className="utility-link">
+              Admin Login
             </a>
             <a href={externalLinks.admissionPortal} target="_blank" rel="noopener noreferrer" className="utility-link">
               Admissions <ExternalLink size={12} />

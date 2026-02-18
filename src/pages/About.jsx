@@ -2,9 +2,8 @@ import {
   Award, Users, BookOpen, Target, Eye, Heart, Star, Globe,
   Briefcase, Building, FlaskConical, GraduationCap, Calendar
 } from 'lucide-react';
-import { leadership, researchAreas, alumniPlacements, partnerCompanies } from '../data/faculty';
+import { leadership, researchAreas, partnerCompanies } from '../data/faculty';
 import { useRevealOnScroll } from '../lib/hooks';
-import './About.css';
 
 const coreValues = [
   { icon: <BookOpen size={24} />, title: 'Quality Education', desc: 'Dynamic knowledge and practical skills through cutting-edge curriculum.' },
@@ -136,6 +135,61 @@ export default function About() {
         </div>
       </section>
 
+      {/* Campus Life */}
+      <section className="section campus-section">
+        <div className="container">
+          <div className="section-header">
+            <span className="section-badge">Campus Life</span>
+            <h2 className="section-title">Experience a Vibrant Campus</h2>
+            <p className="section-subtitle">
+              Our campus offers a perfect blend of academic rigor and extracurricular activities, fostering holistic development of every student.
+            </p>
+          </div>
+          <div className="campus-grid">
+            <div className="campus-info reveal-left reveal">
+              <div className="campus-features">
+                {[
+                  { icon: <FlaskConical size={24} />, title: 'Modern Laboratories', desc: '6 specialized labs with latest equipment' },
+                  { icon: <BookOpen size={24} />, title: 'Digital Library', desc: '2500+ books and digital resources' },
+                  { icon: <Users size={24} />, title: 'Student Societies', desc: 'Active clubs and societies' },
+                  { icon: <Trophy size={24} />, title: 'Competitions', desc: 'Regular hackathons and tech events' },
+                ].map((feat, i) => (
+                  <div key={i} className="campus-feature-item">
+                    <div className="cf-icon">{feat.icon}</div>
+                    <div>
+                      <h4>{feat.title}</h4>
+                      <p>{feat.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="campus-visual reveal-right reveal">
+              <div className="campus-gallery">
+                <img
+                  src="/images/College Pics/College/IMG-20241226-WA0010.jpg"
+                  alt="SoET Campus"
+                  className="gallery-main"
+                  loading="lazy"
+                />
+                <img
+                  src="/images/College Pics/LAB/Computer Lab.jpg"
+                  alt="Computer Lab"
+                  className="gallery-thumb gallery-thumb-1"
+                  loading="lazy"
+                />
+                <img
+                  src="/images/College Pics/Auditorium/Auditorium.jpg"
+                  alt="Auditorium"
+                  className="gallery-thumb gallery-thumb-2"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Timeline */}
       <section className="section timeline-section">
         <div className="container">
@@ -206,37 +260,6 @@ export default function About() {
             {researchAreas.map((area, i) => (
               <span key={i} className="research-tag">{area}</span>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Alumni Placements */}
-      <section className="section alumni-section">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-badge">Alumni</span>
-            <h2 className="section-title">Where Our Alumni Work</h2>
-            <p className="section-subtitle">
-              Our graduates are making an impact at top companies worldwide.
-            </p>
-          </div>
-          <div className="grid grid-3">
-            {alumniPlacements.map((alum, i) => (
-              <div key={i} className="alumni-card">
-                <span className={`alumni-tag tag-${alum.tag.toLowerCase().replace(' ', '-')}`}>{alum.tag}</span>
-                <h4>{alum.name}</h4>
-                <p className="alumni-branch">{alum.branch}</p>
-                <p className="alumni-company">{alum.company}</p>
-              </div>
-            ))}
-          </div>
-          <div className="partner-logos">
-            <h4>Our Recruiters</h4>
-            <div className="partners-list">
-              {partnerCompanies.map((company, i) => (
-                <span key={i} className="partner-badge">{company}</span>
-              ))}
-            </div>
           </div>
         </div>
       </section>

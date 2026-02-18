@@ -6,7 +6,6 @@ import {
 import { btechPrograms, mtechPrograms, admissionProcess } from '../data/academics';
 import { externalLinks } from '../data/siteData';
 import { useRevealOnScroll } from '../lib/hooks';
-import './Admissions.css';
 
 export default function Admissions() {
   const pageRef = useRevealOnScroll();

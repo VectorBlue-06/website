@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 import { btechPrograms, mtechPrograms } from '../data/academics';
 import { useRevealOnScroll } from '../lib/hooks';
-import './Departments.css';
 
 const iconMap = {
   building: <Building size={28} />,
@@ -96,7 +95,7 @@ export default function Departments() {
             ))}
           </div>
           <div className="text-center" style={{ marginTop: '2.5rem' }}>
-            <Link to="/admissions" className="btn btn-primary btn-lg">
+            <Link to="/admissions" className="btn btn-primary">
               Apply Now <ArrowRight size={16} />
             </Link>
           </div>

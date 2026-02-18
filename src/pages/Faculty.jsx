@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Users, Phone, BookOpen, Search, Filter } from 'lucide-react';
 import { faculty, departments } from '../data/faculty';
 import { useRevealOnScroll } from '../lib/hooks';
-import './Faculty.css';
 
 export default function Faculty() {
   const [selectedDept, setSelectedDept] = useState('All');

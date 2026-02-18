@@ -1,0 +1,53 @@
+.sitemap-wrapper {
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.sitemap-tree {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sitemap-node {
+  position: relative;
+  padding-left: 1rem;
+  color: var(--text-primary);
+}
+
+.sitemap-node::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.95rem;
+  width: 0.75rem;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.sitemap-link {
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.sitemap-link:hover {
+  color: var(--color-primary-red);
+}
+
+.sitemap-children {
+  list-style: none;
+  border-left: 1px solid var(--border-color);
+  margin: 0.35rem 0 0.35rem 0.35rem;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.sitemap-children .sitemap-node::before {
+  top: 0.8rem;
+}

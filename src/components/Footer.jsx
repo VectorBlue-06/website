@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Facebook, Twitter, Linkedin, ArrowUp, ExternalLink } from 'lucide-react';
 import { siteConfig, contactInfo, socialLinks, externalLinks } from '../data/siteData';
-import './Footer.css';
 
 const footerLinks = {
   quickLinks: [
@@ -21,6 +20,43 @@ const footerLinks = {
     { label: 'AICTE', url: externalLinks.aicte },
   ],
 };
+
+const footerTree = [
+  {
+    label: 'About',
+    children: [
+      { label: 'About Us', path: '/about' },
+      { label: "VC's Vision", path: '/vc-vision' },
+      { label: 'Alumni & Placements', path: '/alumni' },
+      { label: 'NCC', path: '/ncc' },
+      { label: 'Anti-Ragging', path: '/anti-ragging' },
+    ],
+  },
+  {
+    label: 'Academics',
+    children: [
+      { label: 'Departments', path: '/departments' },
+      { label: 'Faculty', path: '/faculty' },
+      { label: 'Admissions', path: '/admissions' },
+    ],
+  },
+  {
+    label: 'Campus',
+    children: [
+      { label: 'Societies', path: '/societies' },
+      { label: 'Events', path: '/events' },
+      { label: 'Notices', path: '/notices' },
+      { label: 'Contact', path: '/contact' },
+    ],
+  },
+  {
+    label: 'Portals',
+    children: [
+      { label: 'Student Login', path: '/student-login' },
+      { label: 'Teacher Login', path: '/teacher-login' },
+    ],
+  },
+];
 
 export default function Footer() {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -102,9 +138,12 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} {siteConfig.fullName}, {siteConfig.university}. All rights reserved.
           </p>
-          <p className="footer-credit">
-            Built with ❤️ by <a href={siteConfig.madeBy.url} target="_blank" rel="noopener noreferrer">{siteConfig.madeBy.name}</a>
-          </p>
+          <div className="footer-sitemap-link">
+            <Link to="/sitemap">Site Map</Link>
+          </div>
+          <div className="visitor-counter">
+            <span>Visitors: 27,49,874</span>
+          </div>
         </div>
       </div>
 

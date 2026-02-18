@@ -6,7 +6,7 @@ export const siteConfig = {
   founded: 1957,
   soetEstablished: 2011,
   approval: 'AICTE Approved',
-  websiteUrl: 'https://soet.vikramuniv.ac.in/',
+  websiteUrl: 'https://vikramuniv.ac.in/page/school-of-engineering-and-technology',
   madeBy: {
     name: 'Code_d_Code Society',
     url: 'https://www.codedcode.tech',
@@ -28,10 +28,10 @@ export const contactInfo = {
   fax: '+91 734-2514274',
   address: {
     line1: 'School of Engineering and Technology',
-    line2: 'Samrat Vikramaditya Vishwavidyalaya',
-    line3: 'Dewas Road, Ujjain',
+    line2: 'Vikram University',
+    line3: 'Ujjain',
     line4: 'Madhya Pradesh - 456010, India',
-    full: 'School of Engineering and Technology, Samrat Vikramaditya Vishwavidyalaya, Dewas Road, Ujjain, Madhya Pradesh - 456010, India',
+    full: 'School of Engineering and Technology, Vikram University, Ujjain, Madhya Pradesh - 456010, India',
   },
   coordinates: { lat: 23.1685, lng: 75.7879 },
   officeHours: {

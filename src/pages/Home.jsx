@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import { siteConfig, stats, externalLinks } from '../data/siteData';
 import { useRevealOnScroll } from '../lib/hooks';
-import './Home.css';
+
 
 const featuredPrograms = [
   {
@@ -55,12 +55,13 @@ export default function Home() {
         <div className="container hero-content">
           <div className="hero-text">
             <span className="hero-badge">
-              <Award size={16} /> {siteConfig.approval} | Since {siteConfig.founded}
+              <Award size={16} /> {siteConfig.approval} | Since {siteConfig.soetEstablished}
             </span>
             <h1 className="hero-title">
               Empowering <span className="text-gradient">Innovation</span>,<br />
               Shaping <span className="text-gradient-blue">Futures</span>
             </h1>
+            <h2 className="hero-subtitle">{siteConfig.fullName}, {siteConfig.university}</h2>
             <p className="hero-desc">
               {siteConfig.name}, {siteConfig.university} — Premier destination for
               engineering excellence, research, and holistic development. Where tomorrow's
@@ -137,57 +138,6 @@ export default function Home() {
             <Link to="/departments" className="btn btn-secondary">
               View All Programs <ArrowRight size={16} />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Campus Life */}
-      <section className="section campus-section">
-        <div className="container">
-          <div className="campus-grid">
-            <div className="campus-info reveal-left reveal">
-              <span className="section-badge">Campus Life</span>
-              <h2 className="section-title" style={{ textAlign: 'left' }}>
-                Experience a Vibrant Campus
-              </h2>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-                Our campus offers a perfect blend of academic rigor and extracurricular activities,
-                fostering holistic development of every student.
-              </p>
-              <div className="campus-features">
-                {campusFeatures.map((feat, i) => (
-                  <div key={i} className="campus-feature-item">
-                    <div className="cf-icon">{feat.icon}</div>
-                    <div>
-                      <h4>{feat.title}</h4>
-                      <p>{feat.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="campus-visual reveal-right reveal">
-              <div className="campus-gallery">
-                <img
-                  src="/images/College Pics/College/IMG-20241226-WA0010.jpg"
-                  alt="SoET Campus"
-                  className="gallery-main"
-                  loading="lazy"
-                />
-                <img
-                  src="/images/College Pics/LAB/Computer Lab.jpg"
-                  alt="Computer Lab"
-                  className="gallery-thumb gallery-thumb-1"
-                  loading="lazy"
-                />
-                <img
-                  src="/images/College Pics/Auditorium/Auditorium.jpg"
-                  alt="Auditorium"
-                  className="gallery-thumb gallery-thumb-2"
-                  loading="lazy"
-                />
-              </div>
-            </div>
           </div>
         </div>
       </section>

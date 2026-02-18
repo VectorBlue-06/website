@@ -5,7 +5,6 @@ import {
 } from 'lucide-react';
 import { contactInfo, departmentContacts, directions, externalLinks } from '../data/siteData';
 import { useRevealOnScroll } from '../lib/hooks';
-import './Contact.css';
 
 const inquiryTypes = ['Admission', 'Academic', 'Placement', 'Facilities', 'Research', 'General', 'Other'];
 

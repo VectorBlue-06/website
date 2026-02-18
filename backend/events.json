@@ -1,0 +1,26 @@
+[
+	{
+		"id": 1739788200001,
+		"title": "Tech Symposium 2025",
+		"description": "Student showcases on AI, IoT, and robotics with industry mentors.",
+		"date": "2025-03-05",
+		"participants": "200",
+		"type": "academic"
+	},
+	{
+		"id": 1739788200002,
+		"title": "Cultural Night",
+		"description": "Music, dance, and theatre performances by student societies.",
+		"date": "2025-02-28",
+		"participants": "150",
+		"type": "cultural"
+	},
+	{
+		"id": 1739788200003,
+		"title": "Community Clean-Up Drive",
+		"description": "Neighborhood sanitation and awareness drive led by NSS volunteers.",
+		"date": "2025-02-22",
+		"participants": "120",
+		"type": "social"
+	}
+]

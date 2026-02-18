@@ -1,6 +1,5 @@
 import { Sparkles, SparklesIcon } from 'lucide-react';
 import { useEffects } from '../context/EffectsContext';
-import './EffectsToggle.css';
 
 export default function EffectsToggle() {
   const { effectsEnabled, toggleEffects } = useEffects();
